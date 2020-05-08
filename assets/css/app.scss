@@ -1,0 +1,10 @@
+/*Variables */
+@import "variables.scss";
+/* Boostrap impot CSS */
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: $mainColor;
+}
+
+
