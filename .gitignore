@@ -3,6 +3,7 @@
 *.cache
 db.php
 .idea
+.idea/
 
 ###> symfony/framework-bundle ###
 /.env.local
