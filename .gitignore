@@ -4,6 +4,7 @@
 db.php
 .idea
 .idea/
+/.idea
 
 ###> symfony/framework-bundle ###
 /.env.local
