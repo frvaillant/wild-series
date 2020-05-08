@@ -2,7 +2,9 @@
 .phpcs-cache
 *.cache
 db.php
-.idea###> symfony/framework-bundle ###
+.idea
+
+###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
 /.env.*.local
