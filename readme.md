@@ -1,6 +1,8 @@
-**WILD SERIES**
+#WILD SERIES
 
-*Coding project in wild ocde school*
+##Coding project at wild code school
+
+**TAKE CARE TO SWITCH TO THE BRANCH RELATED TO THE QUEST**
 
 - clone repository
 - run composer install
