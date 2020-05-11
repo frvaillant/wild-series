@@ -1,0 +1,21 @@
+/*Typos */
+@import url("https://fonts.googleapis.com/css?family=Patua+One&display=swap");
+/*Variables */
+@import "variables.scss";
+/* Boostrap impot CSS */
+@import "~bootstrap/scss/bootstrap";
+/* Fontawesome */
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
+body {
+  background-color: #fff;
+}
+
+nav {
+  a.site-name {
+    font-family: $main-font;
+    font-size:1.5rem;
+  }
+}
+
+
