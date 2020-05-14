@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/", name="wild")
+ * @Route("/wild", name="wild")
  */
 class WildController extends AbstractController
 {
@@ -24,19 +24,7 @@ class WildController extends AbstractController
     }
 
     /**
-     * @Route("/home", name="home")
-     */
-    public function home(): Response
-    {
-        return $this->render('home.html.twig', [
-            'website' => 'Wild Série',
-        ]);
-    }
-
-
-
-    /**
-     * @Route("wild/show/{title}",
+     * @Route("/show/{title}",
      *     requirements={"title"="[a-z0-9\-]*"},
      *     defaults={"title"="Aucune série selectionnée"},
      *     name="show")
@@ -50,6 +38,4 @@ class WildController extends AbstractController
         ]);
 
     }
-
-
 }
