@@ -1,0 +1,12 @@
+{% extends('base.html.twig') %}
+
+{%  block body %}
+    <div class="container">
+        <h1> Bienvenue sur le site {{ website }}</h1>
+
+        <p>Vous voulez voir la série : <h1>{{ title }}</h1></p>
+        <p><small>Pour voir une série, saisissez son nom dans l'URL en séparant les mots par des tirets (-), ou choisissez dans le menu ci-dessous</small></p>
+        <p><small><b>Par exemple : </b> /wild/show/game-of-thrones </small></p>
+
+    </div>
+{% endblock %}
