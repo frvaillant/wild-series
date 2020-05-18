@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/wild", name="wild")
+ * @Route("/wild", name="wild_")
  */
 class WildController extends AbstractController
 {
