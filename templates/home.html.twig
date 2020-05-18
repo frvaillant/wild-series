@@ -4,4 +4,16 @@
     <div class="container">
         <h1> Bienvenue sur le site {{ website }}</h1>
     </div>
+    <div class="container">
+        {% for program in programs %}
+
+                <p>
+                    <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a>
+                </p>
+
+
+        {% else %}
+            Aucune série trouvée.
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,12 +1,18 @@
 {% extends('base.html.twig') %}
 
+{% block title %}{{ program.title }}{% endblock %}
+
 {%  block body %}
+
+    {% if (program) %}
     <div class="container">
-        <h1> Bienvenue sur le site {{ website }}</h1>
-
-        <p>Vous voulez voir la série : <h1>{{ title }}</h1></p>
-        <p><small>Pour voir une série, saisissez son nom dans l'URL en séparant les mots par des tirets (-), ou choisissez dans le menu ci-dessous</small></p>
-        <p><small><b>Par exemple : </b> /wild/show/game-of-thrones </small></p>
-
+        <h1>{{ program.title }}</h1>
+        <p><b>Catégorie : </b>{{ program.category.name }}</p>
+        <p>{{ program.summary }}</p>
+        <p><img src="{{ program.poster }}" width="100"></p>
     </div>
+        <a href="{{ path('wild_index') }}">
+            Retour à l'accueil
+        </a>
+    {% endif %}
 {% endblock %}
