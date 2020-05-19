@@ -6,7 +6,7 @@
 
     <div class="container">
         <h1>Vous recherchez le séries de la catégorie : {{ cat }}</h1>
-    </div>
+
     {% for program in programs %}
         <p>
         {{ program.id }} : {{ program.title }}<br>
@@ -16,5 +16,5 @@
         <a href="{{ path('wild_index') }}">
             Retour à l'accueil
         </a>
-
+    </div>
 {% endblock %}

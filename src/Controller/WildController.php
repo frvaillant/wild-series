@@ -75,13 +75,21 @@ class WildController extends AbstractController
     public function showByCat(string $cat, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
     {
         $cat = ucwords(str_replace('-', ' ', $cat));
-
-        $category = $categoryRepository->findOneByName($cat);
-        $programs = $programRepository->findBy(
-            ['category' => $category->getId()],
-            ['id' => 'asc'],
-             3,
-        );
+        if (!$cat) {
+            throw $this->createNotFoundException('Aucune catégorie dans laquelle rechercher');
+        } else {
+            $category = $categoryRepository->findOneByName($cat);
+            $programs = $programRepository->findBy(
+                ['category' => $category->getId()],
+                ['id' => 'asc'],
+                3,
+            );
+        }
+        if (!$programs) {
+            throw $this->createNotFoundException(
+                'No program found in ' . $cat . ' category'
+            );
+        }
 
         return $this->render('cat.html.twig', [
             'website' => 'Wild Série',

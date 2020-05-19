@@ -1,14 +1,13 @@
 {% extends('base.html.twig') %}
 
 {%  block body %}
-    <div class="container">
-        <h1> Bienvenue sur le site {{ website }}</h1>
-    </div>
-    <div class="container">
-        {% for program in programs %}
 
+    <div class="container">
+        <h2>Toutes les séries</h2>
+        {% for program in programs %}
                 <p>
-                    <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a>
+                    <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a><br>
+                    <b>Catégorie :</b> <a href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
                 </p>
 
 
