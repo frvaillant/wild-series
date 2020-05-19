@@ -1,6 +1,6 @@
 {% extends('base.html.twig') %}
 
-{% block title %} {{ cat }} {% endblock %}
+{% block title %} {{ website }} : {{ cat }} {% endblock %}
 
 {%  block body %}
 
@@ -9,8 +9,11 @@
 
     {% for program in programs %}
         <p>
-        {{ program.id }} : {{ program.title }}<br>
+            <b>Série n°{{ program.id }} : <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a></b><br>
         {{ program.summary }}
+        </p>
+        <p>
+            {{ program.seasons|length }} saisons
         </p>
     {% endfor %}
         <a href="{{ path('wild_index') }}">

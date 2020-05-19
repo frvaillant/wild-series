@@ -1,0 +1,30 @@
+{% extends('base.html.twig') %}
+
+{% block title %}  {{ website }} : {{ season.program.title }} {% endblock %}
+
+{%  block body %}
+
+    <div class="container">
+        <h1>Saison {{ season.number }} - {{ season.year }}</h1>
+        <h2>
+            <a href="{{ path('wild_show', { 'title': season.program.title|replace({' ':"-"})|lower }) }}">{{ season.program.title }}</a>
+        </h2>
+        <p>
+            {{ season.description }}
+        </p>
+        <p>
+            {% for episode in season.episodes %}
+                <p>
+                    - <b>Episode {{ episode.number }} :</b> {{ episode.title }}<br>
+                    {{ episode.synopsis|slice(0, 100) }}...
+                </p>
+
+            {% endfor %}
+        </p>
+
+
+        <a href="{{ path('wild_index') }}">
+            Retour à l'accueil
+        </a>
+    </div>
+{% endblock %}

@@ -7,12 +7,9 @@
         {% for program in programs %}
                 <p>
                     <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a><br>
-                    <b>Catégorie :</b> <a href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
+                    <b>Catégorie :</b> <a href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a><br>
+                    - {{ program.seasons|length }} saisons.
                 </p>
-
-
-        {% else %}
-            Aucune série trouvée.
         {% endfor %}
     </div>
 {% endblock %}

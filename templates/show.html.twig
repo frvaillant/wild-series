@@ -1,18 +1,28 @@
 {% extends('base.html.twig') %}
 
-{% block title %}{{ program.title }}{% endblock %}
+{% block title %} {{ website }} : {{ program.title }}{% endblock %}
 
 {%  block body %}
 
-    {% if (program) %}
+  {% if (program) %}
     <div class="container">
         <h1>{{ program.title }}</h1>
         <p><b>Catégorie : </b>{{ program.category.name }}</p>
         <p>{{ program.summary }}</p>
         <p><img src="{{ program.poster }}" width="100"></p>
+        <div class="row">
+            <div class="col-4">
+                {{ program.seasons|length }} SAISONS<br>
+                {% for season in program.seasons %}
+                    <p>
+                        <b><a href="{{ path('wild_season', { 'seasonId': season.id }) }}">Saison n° {{ season.number }}</a></b><br>
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-        <a href="{{ path('wild_index') }}">
-            Retour à l'accueil
-        </a>
-    {% endif %}
+    <a href="{{ path('wild_index') }}">
+        Retour à l'accueil
+    </a>
+  {% endif %}
 {% endblock %}

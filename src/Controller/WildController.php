@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
+use App\Repository\SeasonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +21,10 @@ class WildController extends AbstractController
     /**
      * @Route("", name="index")
      */
-    public function index(): Response
+    public function index(ProgramRepository $programRepository): Response
     {
-        $programs = $this->getDoctrine()
-                        ->getRepository(Program::class)
-                        ->findAll();
+        $programs = $programRepository->findAll();
+
         if (!$programs) {
             throw $this->createNotFoundException(
                 'Aucune série trouvée'
@@ -42,15 +43,13 @@ class WildController extends AbstractController
      *     defaults={"title"="Aucune série selectionnée"},
      *     name="show")
      */
-    public function show(string $title): Response
+    public function show(string $title, ProgramRepository $programRepository): Response
     {
         $title = ucwords(str_replace('-', ' ', $title));
         if (!$title) {
             throw $this->createNotFoundException('Aucune série à rechercher');
         } else {
-            $program = $this->getDoctrine()
-                ->getRepository(Program::class)
-                ->findOneBy(['title' => $title ]);
+            $program = $programRepository->findOneBy(['title' => $title ]);
             }
         if (!$program) {
             throw $this->createNotFoundException(
@@ -94,6 +93,21 @@ class WildController extends AbstractController
             'website' => 'Wild Série',
             'programs' => $programs,
             'cat'   => $cat,
+        ]);
+    }
+
+    /**
+     * @Route("/wild/season/{seasonId}",
+     *     requirements={"seasonId"="[0-9]*"},
+     *     defaults={"seasonId"="1"},
+     *     name="season")
+     */
+    public function showBySeason (int $seasonId, SeasonRepository $seasonRepository): Response
+    {
+        $season = $seasonRepository->findOneById($seasonId);
+        return $this->render('season.html.twig', [
+            'website' => 'Wild Série',
+            'season' => $season,
         ]);
     }
 }
