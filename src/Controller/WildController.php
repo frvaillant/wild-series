@@ -65,7 +65,6 @@ class WildController extends AbstractController
 
     }
 
-
     /**
      * @Route("/wild/cat/{cat}",
      *     requirements={"cat"="[a-z\-]*"},
