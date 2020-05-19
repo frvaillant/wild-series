@@ -81,7 +81,7 @@ class WildController extends AbstractController
             $category = $categoryRepository->findOneByName($cat);
             $programs = $programRepository->findBy(
                 ['category' => $category->getId()],
-                ['id' => 'asc'],
+                ['id' => 'desc'],
                 3,
             );
         }
