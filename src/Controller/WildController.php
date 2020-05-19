@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Episode;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
@@ -98,7 +99,7 @@ class WildController extends AbstractController
 
     /**
      * @Route("/wild/season/{seasonId}",
-     *     requirements={"seasonId"="[0-9]*"},
+     *     requirements={"seasonId"="[0-9]{1,}"},
      *     defaults={"seasonId"="1"},
      *     name="season")
      */
@@ -109,5 +110,25 @@ class WildController extends AbstractController
             'website' => 'Wild Série',
             'season' => $season,
         ]);
+    }
+
+    /**
+     * @param Episode $episode
+     * @return Response
+     * @Route("/wild/episode/{id}",
+     *     requirements={"id"="[0-9]{1,}"},
+     *     defaults={"id"="1"},
+     *     name="episode")
+     */
+    public function showEpisode(Episode $episode): Response
+    {
+        //$episode->getSeason();  PAS BESOIN
+        //$season->getProgram();  PAS BESOIN NON PLUS
+
+        return $this->render('episode.html.twig', [
+            'website' => 'Wild Série',
+            'episode' => $episode,
+        ]);
+
     }
 }
