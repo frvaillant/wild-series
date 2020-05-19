@@ -15,14 +15,12 @@
                 {{ program.seasons|length }} SAISONS<br>
                 {% for season in program.seasons %}
                     <p>
-                        <b><a href="{{ path('wild_season', { 'seasonId': season.id }) }}">Saison n° {{ season.number }}</a></b><br>
+                        <b><a href="{{ path('wild_season', { 'seasonId': season.id }) }}">Saison n° {{ season.number }}</a></b>
+                        ({{ season.episodes|length }} épisodes)<br>
                     </p>
                 {% endfor %}
             </div>
         </div>
     </div>
-    <a href="{{ path('wild_index') }}">
-        Retour à l'accueil
-    </a>
   {% endif %}
 {% endblock %}
