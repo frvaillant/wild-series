@@ -7,7 +7,7 @@
   {% if (program) %}
     <div class="container">
         <h1>{{ program.title }}</h1>
-        <p><b>Catégorie : </b>{{ program.category.name }}</p>
+        <p><b>Catégorie : </b><a href="{{ path('wild_cat', {'cat' :program.category.name|replace({' ':"-"})|lower}) }}">{{ program.category.name }}</a></p>
         <p>{{ program.summary }}</p>
         <p><img src="{{ program.poster }}" width="100"></p>
         <div class="row">

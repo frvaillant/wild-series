@@ -15,7 +15,7 @@
         <p>
             {% for episode in season.episodes %}
                 <p>
-                    - <b>Episode {{ episode.number }} :</b> {{ episode.title }}<br>
+            - <b>Episode {{ episode.number }} :</b> <a href="{{ path('wild_episode', {'id' : episode.id}) }}">{{ episode.title }}</a><br>
                     {{ episode.synopsis|slice(0, 100) }}...
                 </p>
 
