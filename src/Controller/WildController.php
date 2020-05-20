@@ -11,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Program;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\ProgramSearchType;
+
 
 /**
  * @Route("/", name="wild_")
@@ -21,19 +24,22 @@ class WildController extends AbstractController
     /**
      * @Route("", name="index")
      */
-    public function index(ProgramRepository $programRepository): Response
+    public function index(ProgramRepository $programRepository, Request $request): Response
     {
-        $programs = $programRepository->findAll();
+        $errors = '';
+
+            $programs = $programRepository->findAll();
+
 
         if (!$programs) {
-            throw $this->createNotFoundException(
-                'Aucune série trouvée'
-            );
+                $errors = 'Aucune série trouvée';
         }
 
         return $this->render('home.html.twig', [
+            'errors'   => $errors,
             'programs' => $programs,
             'website'  => 'Wild Series',
+            'form'     => $form->createView(),
         ]);
     }
 
