@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Program;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\ProgramSearchType;
+use App\Form\ProgramSearch;
 
 
 /**
@@ -25,12 +25,11 @@ class WildController extends AbstractController
     /**
      * @Route("", name="index")
      */
-    public function index(ProgramRepository $programRepository, Request $request): Response
+    public function index(ProgramRepository $programRepository): Response
     {
         $errors = '';
 
             $programs = $programRepository->findAll();
-
 
         if (!$programs) {
                 $errors = 'Aucune série trouvée';
@@ -40,7 +39,6 @@ class WildController extends AbstractController
             'errors'   => $errors,
             'programs' => $programs,
             'website'  => 'Wild Series',
-            'form'     => $form->createView(),
         ]);
     }
 
@@ -63,7 +61,7 @@ class WildController extends AbstractController
                 'No program with ' . $title . ' title, found in program\'s table.'
             );
         }
-            return $this->render('show.html.twig', [
+            return $this->render('wild/show.html.twig', [
                 'website' => 'Wild Série',
                 'program' => $program,
             ]);
@@ -96,7 +94,7 @@ class WildController extends AbstractController
             );
         }
 
-        return $this->render('cat.html.twig', [
+        return $this->render('wild/cat.html.twig', [
             'website' => 'Wild Série',
             'programs' => $programs,
             'cat'   => $cat,
@@ -112,7 +110,7 @@ class WildController extends AbstractController
     public function showBySeason (int $seasonId, SeasonRepository $seasonRepository): Response
     {
         $season = $seasonRepository->findOneById($seasonId);
-        return $this->render('season.html.twig', [
+        return $this->render('wild/season.html.twig', [
             'website' => 'Wild Série',
             'season' => $season,
         ]);
@@ -131,7 +129,7 @@ class WildController extends AbstractController
         //$episode->getSeason();  PAS BESOIN
         //$season->getProgram();  PAS BESOIN NON PLUS
 
-        return $this->render('episode.html.twig', [
+        return $this->render('wild/episode.html.twig', [
             'website' => 'Wild Série',
             'episode' => $episode,
         ]);

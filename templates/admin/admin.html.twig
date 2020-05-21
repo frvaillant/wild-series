@@ -1,0 +1,27 @@
+{% extends('base.html.twig') %}
+
+{% block title %}  {{ website }} : Admin {% endblock %}
+
+{%  block body %}
+    <div class="container">
+        <div class="col-12 col-md-6">
+
+            <span class="text-danger">{{ message|replace({'_': ' '}) }}</span>
+
+            {{ form_start(form_cat) }}
+            {{ form_row(form_cat.name) }}
+            <button type="submit" name="btnSearch">Ajouter une catégorie</button>
+            {{ form_end(form_cat) }}
+        </div>
+        <div class="col-12 col-md-6">
+            <ul>
+                {% for category in categories %}
+                    <li>{{ category.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+
+{% endblock %}
