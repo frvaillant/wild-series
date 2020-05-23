@@ -21,20 +21,27 @@ class WildController extends AbstractController
 
     /**
      * @Route("", name="index")
+     * @param ProgramRepository $programRepository
+     * @param CategoryRepository $categoryRepository
+     * @return Response
      */
-    public function index(ProgramRepository $programRepository): Response
+    public function index(ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
+        $errors = '';
         $programs = $programRepository->findAll();
-
+        $homeProgram = $programRepository->findOneById(1);
         if (!$programs) {
             throw $this->createNotFoundException(
                 'Aucune série trouvée'
             );
         }
-
+        $categories = $categoryRepository->findAll();
         return $this->render('home.html.twig', [
-            'programs' => $programs,
-            'website'  => 'Wild Series',
+            'errors'       => $errors,
+            'home_program' => $homeProgram,
+            'programs'     => $programs,
+            'website'      => 'Wild Series',
+            'categories'   => $categories,
         ]);
     }
 
@@ -44,7 +51,7 @@ class WildController extends AbstractController
      *     defaults={"title"="Aucune série selectionnée"},
      *     name="show")
      */
-    public function show(string $title, ProgramRepository $programRepository): Response
+    public function show(string $title, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
         $title = ucwords(str_replace('-', ' ', $title));
         if (!$title) {
@@ -57,9 +64,13 @@ class WildController extends AbstractController
                 'No program with ' . $title . ' title, found in program\'s table.'
             );
         }
-            return $this->render('show.html.twig', [
-                'website' => 'Wild Série',
-                'program' => $program,
+
+
+        $categories = $categoryRepository->findAll();
+            return $this->render('wild/show.html.twig', [
+                'website'    => 'Wild Série',
+                'program'    => $program,
+                'categories' => $categories,
             ]);
 
 
@@ -78,6 +89,7 @@ class WildController extends AbstractController
             throw $this->createNotFoundException('Aucune catégorie dans laquelle rechercher');
         } else {
             $category = $categoryRepository->findOneByName($cat);
+            $categories = $categoryRepository->findAll();
             $programs = $programRepository->findBy(
                 ['category' => $category->getId()],
                 ['id' => 'desc'],
@@ -94,6 +106,7 @@ class WildController extends AbstractController
             'website' => 'Wild Série',
             'programs' => $programs,
             'cat'   => $cat,
+            'categories' => $categories,
         ]);
     }
 

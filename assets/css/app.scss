@@ -8,13 +8,115 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
 body {
-  background-color: #fff;
+  background-color: #000;
 }
 
 nav {
   a.site-name {
     font-family: $main-font;
     font-size:1.5rem;
+  }
+}
+.row {
+  margin:0;
+}
+@mixin bloc($color) {
+  padding:4px 10px;
+  border-radius:5px;
+  background:$color;
+  color:#fff;
+  font-weight:bold;
+  font-size:0.8rem;
+}
+
+.home-program {
+  height:calc(85vh - 60px);
+  position:relative;
+  .home-program-img {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    img {
+      filter: brightness(0.5);
+      margin-top:-100%;
+      width:110%;
+      margin-left:-5%;
+    }
+  }
+  .home-text {
+    position:absolute;
+    top:50px;
+    left:100px;
+    width:40%;
+    h1 {
+      font-size:4rem;
+      color:#fff;
+    }
+    .home-category {
+      @include bloc(#000);
+    }
+    .home-seasons {
+      @include bloc(#000);
+    }
+    p {
+      margin-top:20px;
+      color:#fff;
+      font-size:1.3rem;
+    }
+  }
+}
+
+.program-cards {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width:90%;
+  margin-left:5%;
+  margin-top:-100px;
+
+  .btn-small {
+    font-size:0.9rem;
+    padding:4px 10px;
+    margin-top:10px;
+  }
+
+  .card-program {
+    margin-top:40px;
+    .card-content {
+      box-shadow:0px -10px 10px rgba(0,0,0,0.7), 0px -20px 30px rgba(0,0,0,0.4);
+      .card-img {
+        border-radius:0;
+        width:100%;
+        height:150px;
+        overflow:hidden;
+        img {
+          width:100%;
+          border-radius:0;
+        }
+      }
+      .card-prog-description {
+        background:#fff;
+        padding:10px;
+        .card-prog-title {
+          font-size:1.2rem;
+          font-weight: bold;
+        }
+        .card-category {
+          @include bloc(#000);
+          color:#fff;
+          &:hover {
+            text-decoration:none;
+            color:$primary;
+          }
+        }
+        .card-seasons {
+          @include bloc(#000);
+          color:#fff;
+        }
+      }
+    }
   }
 }
 

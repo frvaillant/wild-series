@@ -1,15 +1,44 @@
 {% extends('base.html.twig') %}
 
 {%  block body %}
+    <div class="home-program">
+        <div class="home-program-img">
+            <img src="{{ home_program.poster }}" width="100%">
+        </div>
+        <div class="home-text">
+            <h1>{{ home_program.title }}</h1>
+            <span class="home-category">{{ home_program.category.name }}</span>
+            <span class="home-seasons">{{ home_program.seasons|length }} saisons</span>
+            <p>
+                {{ home_program.summary }}
+            </p>
+            <a class="btn btn-primary" href="{{ path('wild_show', { 'title': home_program.title|replace({' ':"-"})|lower }) }}">En savoir plus</a>
+        </div>
+    </div>
 
-    <div class="container">
-        <h2>Toutes les séries</h2>
+
+    <div class="">
+        <div class="row program-cards">
+
         {% for program in programs %}
-                <p>
-                    <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a><br>
-                    <b>Catégorie :</b> <a href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a><br>
-                    - {{ program.seasons|length }} saisons.
-                </p>
+            {% if program.id != 1 %}
+                <div class="card-program col-12 col-md-3">
+                    <div class="card-content">
+                        <div class="card-img">
+                                <img src="{{ program.poster}}">
+                        </div>
+                        <div class="card-prog-description">
+                            <div class="card-prog-title">{{ program.title }}</div>
+
+                            <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
+                            <span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
+                            <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'title': home_program.title|replace({' ':"-"})|lower }) }}">En savoir plus</a>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
+        </div>
     </div>
 {% endblock %}
