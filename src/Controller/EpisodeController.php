@@ -82,11 +82,11 @@ class EpisodeController extends AbstractController
 
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
+        $season = $episode->getSeason();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('episode_index');
+            return $this->redirectToRoute('episode_index', ['id' => $season->getId() ]);
         }
 
         return $this->render('episode/edit.html.twig', [
@@ -106,7 +106,8 @@ class EpisodeController extends AbstractController
             $entityManager->remove($episode);
             $entityManager->flush();
         }
+        $season = $episode->getSeason();
 
-        return $this->redirectToRoute('episode_index');
+        return $this->redirectToRoute('episode_index', ['id' => $season->getId() ]);
     }
 }
