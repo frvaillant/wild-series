@@ -64,8 +64,6 @@ class WildController extends AbstractController
                 'No program with ' . $title . ' title, found in program\'s table.'
             );
         }
-
-
         $categories = $categoryRepository->findAll();
             return $this->render('wild/show.html.twig', [
                 'website'    => 'Wild Série',
@@ -103,9 +101,9 @@ class WildController extends AbstractController
         }
 
         return $this->render('cat.html.twig', [
-            'website' => 'Wild Série',
-            'programs' => $programs,
-            'cat'   => $cat,
+            'website'    => 'Wild Série',
+            'programs'   => $programs,
+            'cat'        => $cat,
             'categories' => $categories,
         ]);
     }
@@ -116,12 +114,14 @@ class WildController extends AbstractController
      *     defaults={"seasonId"="1"},
      *     name="season")
      */
-    public function showBySeason (int $seasonId, SeasonRepository $seasonRepository): Response
+    public function showBySeason (int $seasonId, SeasonRepository $seasonRepository, CategoryRepository $categoryRepository): Response
     {
+        $categories = $categoryRepository->findAll();
         $season = $seasonRepository->findOneById($seasonId);
         return $this->render('season.html.twig', [
-            'website' => 'Wild Série',
-            'season' => $season,
+            'website'    => 'Wild Série',
+            'season'     => $season,
+            'categories' => $categories,
         ]);
     }
 
@@ -133,14 +133,15 @@ class WildController extends AbstractController
      *     defaults={"id"="1"},
      *     name="episode")
      */
-    public function showEpisode(Episode $episode): Response
+    public function showEpisode(Episode $episode, CategoryRepository $categoryRepository): Response
     {
         //$episode->getSeason();  PAS BESOIN
         //$season->getProgram();  PAS BESOIN NON PLUS
-
+        $categories = $categoryRepository->findAll();
         return $this->render('episode.html.twig', [
-            'website' => 'Wild Série',
-            'episode' => $episode,
+            'website'    => 'Wild Série',
+            'episode'    => $episode,
+            'categories' => $categories,
         ]);
 
     }

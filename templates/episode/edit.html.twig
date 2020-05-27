@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Episode{% endblock %}
+
+{% block body %}
+    {% include 'admin/_admin_nav.html.twig' %}
+
+    <div class="container">
+    <h1>Edit Episode </h1>
+
+    {{ include('episode/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('episode_index', {'id': episode.season.id }) }}">back to list</a>
+
+    {{ include('episode/_delete_form.html.twig') }}
+</div>
+{% endblock %}

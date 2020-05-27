@@ -9,8 +9,19 @@
 
 body {
   background-color: #000;
+  color:#fff;
 }
-
+table {
+  max-width: 100vw;
+}
+table tr td, table tr th {
+  color:#fff;
+  vertical-align: top;
+  padding-bottom:40px;
+  max-width:35vw;
+  padding:5px 20px;
+  font-width: normal;
+}
 nav {
   a.site-name {
     font-family: $main-font;
@@ -27,6 +38,19 @@ nav {
   color:#fff;
   font-weight:bold;
   font-size:0.8rem;
+}
+
+nav {
+  .navbar-collapse {
+    ul {
+      li {
+        &.edit-btn {
+          margin-left:300px;
+        }
+      }
+    }
+  }
+
 }
 
 .home-program {
@@ -119,5 +143,25 @@ nav {
     }
   }
 }
+
+form {
+  label {
+    display:block;
+  }
+  button {
+    &.btn {
+      background:$primary;
+      color:#fff;
+    }
+  }
+}
+
+a {
+  &.btn {
+    background:$primary;
+    color:#fff;
+  }
+}
+
 
 

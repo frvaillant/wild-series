@@ -3,6 +3,9 @@
 {% block title %}Program{% endblock %}
 
 {% block body %}
+    {% include 'admin/_admin_nav.html.twig' %}
+
+    <div class="container">
     <h1>Program</h1>
 
     <table class="table">
@@ -21,14 +24,29 @@
             </tr>
             <tr>
                 <th>Poster</th>
-                <td>{{ program.poster }}</td>
+                <td><img src="{{ program.poster }}" width="75px"></td>
             </tr>
         </tbody>
     </table>
+    <table>
+
+            <tr>
+                <td>
+                     {{ program.seasons|length }} saisons
+                </td>
+                <td>
+                    <a href="{{ path('season_index', {'seasonId' : program.id}) }}">Voir les saisons</a>
+
+                </td>
+            </tr>
+
+    </table>
+
 
     <a href="{{ path('program_index') }}">back to list</a>
 
     <a href="{{ path('program_edit', {'id': program.id}) }}">edit</a>
 
     {{ include('program/_delete_form.html.twig') }}
+</div>
 {% endblock %}

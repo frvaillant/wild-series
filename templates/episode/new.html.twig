@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Episode{% endblock %}
+
+{% block body %}
+    {% include 'admin/_admin_nav.html.twig' %}
+
+    <div class="container">
+    <h1>Create new Episode for season {{ season.number }} of {{ season.program.title }}</h1>
+
+    {{ include('episode/_form.html.twig') }}
+    <a href="{{ path('episode_index', {'id': season.id }) }}">back to list</a>
+</div>
+{% endblock %}
