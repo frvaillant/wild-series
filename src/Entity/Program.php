@@ -6,9 +6,12 @@ use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
+ * @UniqueEntity("title")
  */
 class Program
 {
@@ -20,16 +23,45 @@ class Program
     private $id;
 
     /**
+     * @Assert\NotBlank(message="ne me laisse pas tout vide")
+     * @Assert\Length(
+     *     max=100,
+     *     maxMessage="Le titre saisi {{ value }} est trop long, il ne devrait pas dépasser {{ limit }} caractères",
+     *     min = 2,
+     *     minMessage = "Le titre doit contenir au moins {{ limit }} lettres",
+     *     allowEmptyString = false
+     *     )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="ne me laisse pas tout vide")
+     *
+     * @Assert\Regex(
+     *     pattern="/(plus belle la vie)/",
+     *     match=false,
+     *     message="On parle vraies séries ici")
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage="Le résumé saisi {{ value }} est trop long, il ne devrait pas dépasser {{ limit }} caractères",
+     *     min = 2,
+     *     minMessage = "Le titre doit contenir au moins {{ limit }} lettres",
+     *     allowEmptyString = false
+     *     )
      * @ORM\Column(type="text")
      */
     private $summary;
 
     /**
+     * @Assert\NotBlank(message="ne me laisse pas tout vide")
+     * @Assert\Length(
+     *     max=255,
+     *     maxMessage="L'URL saisie est trop longue. Merci de ne pas dépasser {{ limit }} caractères",
+     *     min = 10,
+     *     minMessage = "L'URL doit contenir au moins {{ limit }} lettres",
+     *     allowEmptyString = false
+     *     )
      * @ORM\Column(type="string", length=255)
      */
     private $poster;

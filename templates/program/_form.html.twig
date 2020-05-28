@@ -1,4 +1,39 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
+    <div class="row">
+        <div>
+            <h2>{{ form_label(form.title) }}</h2>
+            {% for error in form.title.vars['errors'] %}
+                <div class="form-control-feedback text-primary">{{ error.message }}</div>
+            {% endfor %}
+            {{ form_widget(form.title) }}
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <h2>{{ form_label(form.summary) }}</h2>
+            {% for error in form.summary.vars['errors'] %}
+                <div class="form-control-feedback text-primary">{{ error.message }}</div>
+            {% endfor %}
+            {{ form_widget(form.summary) }}
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <h2>{{ form_label(form.poster) }}</h2>
+            {% for error in form.poster.vars['errors'] %}
+                <div class="form-control-feedback text-primary">{{ error.message }}</div>
+            {% endfor %}
+            {{ form_widget(form.poster) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div>
+            <h2>{{ form_label(form.category) }}</h2>
+            {{ form_widget(form.category) }}
+        </div>
+    </div>
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

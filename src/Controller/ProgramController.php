@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/program")
@@ -31,7 +32,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="program_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CategoryRepository $categoryRepository): Response
+    public function new(Request $request, CategoryRepository $categoryRepository, ValidatorInterface $validator): Response
     {
         $categories = $categoryRepository->findAll();
 
@@ -40,6 +41,7 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($program);
             $entityManager->flush();
