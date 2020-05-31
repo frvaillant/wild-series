@@ -35,7 +35,6 @@ class ProgramController extends AbstractController
     public function new(Request $request, CategoryRepository $categoryRepository, ValidatorInterface $validator): Response
     {
         $categories = $categoryRepository->findAll();
-
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);

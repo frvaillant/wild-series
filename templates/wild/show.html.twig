@@ -5,18 +5,34 @@
 {%  block body %}
 
   {% if (program) %}
-    <div class="container">
-        <h1>{{ program.title }}</h1>
-        <p><b>Catégorie : </b><a href="{{ path('wild_cat', {'cat' :program.category.name|replace({' ':"-"})|lower}) }}">{{ program.category.name }}</a></p>
-        <p>{{ program.summary }}</p>
-        <p><img src="{{ program.poster }}" width="100"></p>
+      <div class="home-program">
+          <div class="home-program-img">
+              <img src="{{ program.poster }}" width="100%">
+          </div>
+      <div class="home-text-inside">
+          <h1>{{ program.title }}</h1>
+      </div>
+      </div>
+    <div class="container mgt50">
         <div class="row">
-            <div class="col-4">
-                {{ program.seasons|length }} SAISONS<br>
+            <div class="col-12 col-md-4">
+                <p><b>Catégorie : </b><a href="{{ path('wild_cat', {'cat' :program.category.name|replace({' ':"-"})|lower}) }}">{{ program.category.name }}</a></p>
+                <p>{{ program.summary }}</p>
+            </div>
+            <div class="col-12 col-md-4">
+                {{ program.seasons|length }} SAISONS<br><br>
                 {% for season in program.seasons %}
                     <p>
                         <b><a href="{{ path('wild_season', { 'seasonId': season.id }) }}">Saison n° {{ season.number }}</a></b>
                         ({{ season.episodes|length }} épisodes)<br>
+                    </p>
+                {% endfor %}
+            </div>
+            <div class="col-12 col-md-4">
+                ACTEURS PRINCIPAUX<br><br>
+                {% for actor in program.actors %}
+                    <p>
+                        <b>{{ actor.name }}</b>
                     </p>
                 {% endfor %}
             </div>

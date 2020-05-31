@@ -103,6 +103,8 @@ class Season
         return $this;
     }
 
+
+
     /**
      * @return Collection|Episode[]
      */

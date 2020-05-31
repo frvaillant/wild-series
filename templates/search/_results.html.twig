@@ -1,0 +1,7 @@
+{% if episode is defined %}
+<h3> {{ episode.title }} </h3>
+<p><small><b>épisode {{ episode.number }}</b> de la saison {{ episode.season.number }}</a> de {{ episode.season.program.title }}</small></p>
+<p>
+    <small><em>{{ episode.synopsis  }}</em></small>
+</p>
+{% endif %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+{% include 'admin/_admin_nav.html.twig' %}
+
+<div class="container">
+    <div class="row mgt50">
+        <div class="col-6">
+            <h1>Faire une recherche</h1>
+            {{ form_start(form) }}
+            <div id="form-search-zone">
+                {% include 'search/_form_search.html.twig' %}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-6" id="results">
+            {% include 'search/_results.html.twig' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('formsearch') }}
+{% endblock %}

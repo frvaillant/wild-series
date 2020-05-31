@@ -31,6 +31,11 @@ nav {
 .row {
   margin:0;
 }
+
+.mgt50 {
+  margin-top:50px;
+}
+
 @mixin bloc($color) {
   padding:4px 10px;
   border-radius:5px;
@@ -62,11 +67,26 @@ nav {
     overflow:hidden;
     img {
       filter: brightness(0.5);
-      margin-top:-100%;
+      margin-top:-50%;
       width:110%;
       margin-left:-5%;
     }
   }
+  .home-text-inside {
+    position:absolute;
+    bottom:60px;
+    width:100%;
+    text-align: center;
+      h1 {
+        font-size:4rem;
+        color:#fff;
+        background:rgba(0,0,0,0.8);
+        padding:10px 50px;
+        display:inline-block;
+        border-radius:10px;
+      }
+  }
+
   .home-text {
     position:absolute;
     top:50px;
