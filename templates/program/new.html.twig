@@ -3,13 +3,22 @@
 {% block title %}New Program{% endblock %}
 
 {% block body %}
+
     {% include 'admin/_admin_nav.html.twig' %}
 
     <div class="container">
-    <h1>Create new Program</h1>
 
-    {{ include('program/_form.html.twig') }}
+        <div class="row">
+            <h1>Create new Program</h1>
+        </div>
 
-    <a href="{{ path('program_index') }}">back to list</a>
-</div>
+        <div class="row" id="form-row">
+            {{ include('program/_form.html.twig') }}
+        </div>
+
+        <div class="row">
+            <a href="{{ path('program_index') }}">back to list</a>
+        </div>
+    </div>
+
 {% endblock %}

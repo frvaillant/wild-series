@@ -1,4 +1,4 @@
 #Wild series
 
-###Quete 14 - validations
-[Voir la vidéo](http://frvaillant.com/wcs/screencasts/14.mp4)
+###Quete 15 - entity Type
+[Voir la vidéo](http://frvaillant.com/wcs/screencasts/15.mov)
