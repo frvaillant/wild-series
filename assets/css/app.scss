@@ -67,7 +67,6 @@ nav {
     overflow:hidden;
     img {
       filter: brightness(0.5);
-      margin-top:-50%;
       width:110%;
       margin-left:-5%;
     }
@@ -146,6 +145,7 @@ nav {
         .card-prog-title {
           font-size:1.2rem;
           font-weight: bold;
+          color:#000;
         }
         .card-category {
           @include bloc(#000);

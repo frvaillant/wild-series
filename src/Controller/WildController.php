@@ -7,11 +7,13 @@ use App\Entity\Episode;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
+use App\Service\DataMaker;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Program;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 /**
  * @Route("/", name="wild_")
@@ -27,9 +29,10 @@ class WildController extends AbstractController
      */
     public function index(ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
+        $pic = DataMaker::getPicture();
         $errors = '';
         $programs = $programRepository->findAll();
-        $homeProgram = $programRepository->findOneById(1);
+        $homeProgram = $programRepository->findOneById($programRepository->getHomeProgramId());
         if (!$programs) {
             throw $this->createNotFoundException(
                 'Aucune série trouvée'

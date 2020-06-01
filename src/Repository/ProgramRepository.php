@@ -19,6 +19,22 @@ class ProgramRepository extends ServiceEntityRepository
         parent::__construct($registry, Program::class);
     }
 
+    /**
+     * @param string $title
+     * @return int Returns id Of last program inserted
+     */
+
+    public function getHomeProgramId(): int
+    {
+        $homeProgram = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+        return $homeProgram[0]->getId();
+
+    }
+
     // /**
     //  * @return Program[] Returns an array of Program objects
     //  */
