@@ -7,9 +7,11 @@ use App\Form\ProgramType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Service\Slugify;
+use App\Service\WildMailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -33,7 +35,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="program_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CategoryRepository $categoryRepository, ValidatorInterface $validator, Slugify $slugify): Response
+    public function new(WildMailer $mailer, Request $request, CategoryRepository $categoryRepository, ValidatorInterface $validator, Slugify $slugify): Response
     {
         $categories = $categoryRepository->findAll();
         $program = new Program();
@@ -45,6 +47,9 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($program);
             $entityManager->flush();
+
+            $mailer->sendMailNewProgram($program->getTitle(), $program->getSummary(), $program->getSlug());
+
 
             return $this->redirectToRoute('program_index');
         }

@@ -1,0 +1,25 @@
+{% apply inky_to_html|inline_css(source('@emailstyles/email.css')) %}
+<container>
+    {# Header #}
+    <row class="black">
+        <columns>
+            <h1> Ajout d'une nouvelle série à WildSeries</h1>
+        </columns>
+    </row>
+    <row>
+        <columns class="left w50">
+            <p class="redtext">
+                <h1>{{ title }}</h1>
+            </p>
+        </columns>
+
+        <columns class="left w50">
+          {{resume}}
+        </columns>
+    </row>
+    <row class="center w100">
+        <a class="button-email" href="http://127.0.0.1:8000/wild/show/{{ slug }}">Voir les détails</a>
+    </row>
+    {# Footer #}
+</container>
+{% endapply %}

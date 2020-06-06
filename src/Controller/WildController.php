@@ -7,9 +7,12 @@ use App\Entity\Episode;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
+use App\Service\WildMailer;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mime\Email;
 
 /**
  * @Route("/", name="wild_")
@@ -25,6 +28,7 @@ class WildController extends AbstractController
      */
     public function index(ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
+
         $errors = '';
         $programs = $programRepository->findAll();
         $homeProgram = $programRepository->findOneById($programRepository->getHomeProgramId());

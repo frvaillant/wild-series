@@ -1,5 +1,5 @@
 #Wild series
 
-###Quete 17 : Services
+###Quete 18 : Mails
 
-[Voir la vidéo](http://frvaillant.com/wcs/screencasts/17.mp4)
+[Voir la vidéo](http://frvaillant.com/wcs/screencasts/18.mp4)
