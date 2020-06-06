@@ -5,17 +5,34 @@
 {%  block body %}
 
     <div class="container">
-        <h1>Vous recherchez le séries de la catégorie : {{ cat }}</h1>
-
+        <div class="row mgt50">
+            <p>Vous recherchez le séries de la catégorie : <strong>{{ cat }}</strong></p>
+        </div>
+{% if programs %}
+    <div class="row mgt50 program-cards-inline">
     {% for program in programs %}
-        <p>
-            <b>Série n°{{ program.id }} : <a href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">{{ program.title }}</a></b><br>
-        {{ program.summary }}
-        </p>
-        <p>
-            {{ program.seasons|length }} saisons
-        </p>
-    {% endfor %}
+        <div class="card-program col-12 col-md-3">
+            <div class="card-content">
+                <div class="card-img">
+                    <img src="{{ program.poster}}">
+                </div>
+                <div class="card-prog-description">
+                    <div class="card-prog-title">{{ program.title }}</div>
 
+                    <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
+                    <span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
+                    <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">En savoir plus</a>
+
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    </div>
+    {% else %}
+        <div class="row mgt50">
+            <p>Aucun résultat</p>
+        </div>
+{% endif %}
     </div>
 {% endblock %}

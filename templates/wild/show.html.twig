@@ -11,13 +11,16 @@
           </div>
       <div class="home-text-inside">
           <h1>{{ program.title }}</h1>
+          <div class="col-6 offset-3">
+              <p class="big-text">{{ program.summary }}</p>
+          </div>
       </div>
       </div>
     <div class="container mgt50">
         <div class="row">
             <div class="col-12 col-md-4">
                 <p><b>Catégorie : </b><a href="{{ path('wild_cat', {'cat' :program.category.name|replace({' ':"-"})|lower}) }}">{{ program.category.name }}</a></p>
-                <p>{{ program.summary }}</p>
+
             </div>
             <div class="col-12 col-md-4">
                 {{ program.seasons|length }} SAISONS<br><br>

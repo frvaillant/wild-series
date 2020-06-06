@@ -9,6 +9,17 @@
             {{ form_widget(form.title) }}
         </div>
     </div>
+    {% if  app.request.get('_route') == 'program_edit' %}
+    <div class="row">
+        <div>
+            <h2>{{ form_label(form.slug) }}</h2>
+            {% for error in form.slug.vars['errors'] %}
+                <div class="form-control-feedback text-primary">{{ error.message }}</div>
+            {% endfor %}
+            {{ form_widget(form.slug) }}
+        </div>
+    </div>
+    {% endif %}
 
     <div class="row">
         <div>
@@ -50,9 +61,21 @@
             </div>
         {% endfor %}
     </div>
+        {% if  app.request.get('_route') != 'program_edit' %}
+            <div class="row d-none">
+                <div>
+                    <h2>{{ form_label(form.slug) }}</h2>
+                    {% for error in form.slug.vars['errors'] %}
+                        <div class="form-control-feedback text-primary">{{ error.message }}</div>
+                    {% endfor %}
+                    {{ form_widget(form.slug) }}
+                </div>
+            </div>
+        {% endif %}
 
     <div class="row">
         <button class="btn">{{ button_label|default('Save') }}</button>
     </div>
+
 
 {{ form_end(form) }}

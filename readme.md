@@ -1,5 +1,5 @@
 #Wild series
 
-###Quete 16 : Fixtures
+###Quete 17 : Services
 
-[Voir la vidéo](http://frvaillant.com/wcs/screencasts/16.mp4)
+[Voir la vidéo](http://frvaillant.com/wcs/screencasts/17.mp4)

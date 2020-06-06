@@ -11,17 +11,13 @@
                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Catégories
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {% for category in categories %}
-                        <a class="dropdown-item" href="{{ path('wild_cat', { 'cat': category.name|replace({' ':"-"})|lower }) }}">{{ category.name }}</a>
-                    {% endfor %}
-                </div>
-            </li>
+                    {{ render(controller('App\\Controller\\NavController::selectCategories', {isActive: app.request.attributes.get('cat')})) }}
 
-            <li class="nav-item edit-btn">
-                <a class="btn" href="{{path('program_index')}}">EDITION</a>
             </li>
+        </ul>
 
+        <ul class="form-inline mt-2 mt-md-0">
+            <a class="btn" href="{{path('program_index')}}">EDITION</a>
         </ul>
     </div>
 </nav>

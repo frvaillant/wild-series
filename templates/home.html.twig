@@ -21,7 +21,7 @@
 
                 {% endfor %}
             </p>
-            <a class="btn btn-primary" href="{{ path('wild_show', { 'title': home_program.title|replace({' ':"-"})|lower }) }}">En savoir plus</a>
+            <a class="btn btn-primary" href="{{ path('wild_show', { 'slug': home_program.slug }) }}">En savoir plus</a>
         </div>
     </div>
 
@@ -41,7 +41,7 @@
 
                             <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
                             <span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
-                            <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'title': program.title|replace({' ':"-"})|lower }) }}">En savoir plus</a>
+                            <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'slug': program.slug }) }}">En savoir plus</a>
 
                         </div>
                     </div>

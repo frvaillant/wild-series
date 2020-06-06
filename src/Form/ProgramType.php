@@ -15,6 +15,7 @@ class ProgramType extends AbstractType
     {
         $builder
             ->add('title', null, ['help' => 'Saisissez votre titre (2 à 100 caractères'])
+            ->add('slug', null, ['help' => 'choisir un slug'])
             ->add('summary', null, ['help' => 'Saisissez votre résumé (2 à 255 caractères'])
             ->add('poster', null, ['help' => 'Saisissez l\'url de votre image'])
             ->add('category', null, ['choice_label'=>'name'])

@@ -3,6 +3,7 @@
 
 namespace App\DataFixtures;
 
+use App\Service\Slugify;
 use Faker;
 use App\Entity\Program;
 use App\Service\DataMaker;
@@ -33,8 +34,10 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         //
         for ($i = 0; $i < count(self::PROGRAMS); $i++) {
             $program = new Program();
+            $slugify = new Slugify();
             $programTitle=DataMaker::removeSpecialCharacters(self::PROGRAMS[$i]);
             $program->setTitle($programTitle);
+            $program->setSlug($slugify->generate($program->getTitle()));
             $program->setSummary($faker->realText());
             $program->setPoster(DataMaker::getPicture());
             $program->setCategory($this->getReference('category_' . rand(0,7)));

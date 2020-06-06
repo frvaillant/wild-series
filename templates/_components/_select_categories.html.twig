@@ -1,0 +1,9 @@
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    {% for category in categories %}
+        <a class="dropdown-item
+           {% if (category.name == active) %}
+            active
+            {% endif %} "
+           href="{{ path('wild_cat', { 'cat': category.name|replace({' ':"-"})|lower }) }}">{{ category.name }}</a>
+    {% endfor %}
+</div>

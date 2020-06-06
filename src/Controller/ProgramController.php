@@ -6,6 +6,7 @@ use App\Entity\Program;
 use App\Form\ProgramType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
+use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="program_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CategoryRepository $categoryRepository, ValidatorInterface $validator): Response
+    public function new(Request $request, CategoryRepository $categoryRepository, ValidatorInterface $validator, Slugify $slugify): Response
     {
         $categories = $categoryRepository->findAll();
         $program = new Program();
@@ -40,7 +41,7 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $program->setSlug($slugify->generate($program->getTitle()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($program);
             $entityManager->flush();

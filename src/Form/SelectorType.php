@@ -15,6 +15,7 @@ class SelectorType extends AbstractType
 {
     private $seasonRepository;
     private $episodeRepository;
+    private $programRepository;
 
     public function __construct(SeasonRepository $seasonRepository, EpisodeRepository $episodeRepository, ProgramRepository $programRepository)
     {

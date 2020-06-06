@@ -7,13 +7,9 @@ use App\Entity\Episode;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
-use App\Service\DataMaker;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Program;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 /**
  * @Route("/", name="wild_")
@@ -29,7 +25,6 @@ class WildController extends AbstractController
      */
     public function index(ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
-        $pic = DataMaker::getPicture();
         $errors = '';
         $programs = $programRepository->findAll();
         $homeProgram = $programRepository->findOneById($programRepository->getHomeProgramId());
@@ -49,22 +44,21 @@ class WildController extends AbstractController
     }
 
     /**
-     * @Route("/wild/show/{title}",
-     *     requirements={"title"="[a-z0-9\-]*"},
-     *     defaults={"title"="Aucune série selectionnée"},
+     * @Route("/wild/show/{slug}",
+     *     requirements={"slug"="[a-z0-9\-]*"},
+     *     defaults={"slug"="Aucune série selectionnée"},
      *     name="show")
      */
-    public function show(string $title, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
+    public function show(string $slug, ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
     {
-        $title = ucwords(str_replace('-', ' ', $title));
-        if (!$title) {
+        if (!$slug) {
             throw $this->createNotFoundException('Aucune série à rechercher');
         } else {
-            $program = $programRepository->findOneBy(['title' => $title ]);
+            $program = $programRepository->findOneBy(['slug' => $slug ]);
             }
         if (!$program) {
             throw $this->createNotFoundException(
-                'No program with ' . $title . ' title, found in program\'s table.'
+                'No program with the slug ' . $slug . ', found in program\'s table.'
             );
         }
         $categories = $categoryRepository->findAll();
@@ -73,8 +67,6 @@ class WildController extends AbstractController
                 'program'    => $program,
                 'categories' => $categories,
             ]);
-
-
     }
 
     /**
@@ -97,12 +89,6 @@ class WildController extends AbstractController
                 3,
             );
         }
-        if (!$programs) {
-            throw $this->createNotFoundException(
-                'No program found in ' . $cat . ' category'
-            );
-        }
-
         return $this->render('cat.html.twig', [
             'website'    => 'Wild Série',
             'programs'   => $programs,
