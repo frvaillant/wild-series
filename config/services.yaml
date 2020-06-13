@@ -6,6 +6,7 @@
 parameters:
     app_sender: 'frvaillant@gmail.com'
     app_admin : 'frvaillant@gmail.com'
+    upload_directory: '%kernel.project_dir%/public/uploads/'
 
 services:
     # default configuration for services in *this* file
