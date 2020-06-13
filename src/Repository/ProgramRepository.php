@@ -24,16 +24,34 @@ class ProgramRepository extends ServiceEntityRepository
      * @return int Returns id Of last program inserted
      */
 
-    public function getHomeProgramId(): int
+    public function getHomeProgramId(): Program
     {
         $homeProgram = $this->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult();
-        return $homeProgram[0]->getId();
+        return $homeProgram[0];
 
     }
+
+    public function getAllProgramsForHome()
+    {
+        $programs = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->innerJoin('p.category', 'c' )
+            ->addSelect('c')
+            ->innerJoin('p.actors', 'a' )
+            ->addSelect('a')
+            ->innerJoin('p.seasons', 's' )
+            ->addSelect('s')
+            ->getQuery()
+            ->getResult();
+        return $programs;
+
+    }
+
+
 
     // /**
     //  * @return Program[] Returns an array of Program objects

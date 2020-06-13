@@ -34,8 +34,9 @@ class WildController extends AbstractController
     {
 
         $errors = '';
-        $programs = $programRepository->findAll();
-        $homeProgram = $programRepository->findOneById($programRepository->getHomeProgramId());
+        $programs = $programRepository->getAllProgramsForHome();
+        $homeProgram = $programRepository->getHomeProgramId();
+
         if (!$programs) {
             throw $this->createNotFoundException(
                 'Aucune série trouvée'

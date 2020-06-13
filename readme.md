@@ -1,5 +1,5 @@
 #Wild series
 
-###Quete 21 : Créer un compte et page profil
+###Quete 22 : query builder
 
-[Voir la vidéo](http://frvaillant.com/wcs/screencasts/21.mp4)
+[Voir la vidéo](http://frvaillant.com/wcs/screencasts/22.mp4)

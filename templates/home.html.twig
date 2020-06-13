@@ -36,13 +36,23 @@
                         <div class="card-img">
                                 <img src="{{ program.poster}}">
                         </div>
-                        <div class="card-prog-description">
-                            <div class="card-prog-title">{{ program.title }}</div>
-
-                            <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
-                            <span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
-                            <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'slug': program.slug }) }}">En savoir plus</a>
-
+                        <div class="card-prog-description container">
+                            <div class="row">
+                                <div class="card-prog-title col-12">
+                                    {{ program.title }}
+                                </div>
+                                <div class="col-6">
+                                    <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
+                                    <br><br><span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
+                                    <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'slug': program.slug }) }}">Détails</a>
+                                </div>
+                                <div class="text-dark col-6">
+                                    <b>Principaux acteurs</b><br>
+                                    {% for actor in program.actors|slice(0, 3) %}
+                                        <small>- {{ actor.name }}</small> <br>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
