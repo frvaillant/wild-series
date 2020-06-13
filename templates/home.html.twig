@@ -44,11 +44,11 @@
 
                             <div class="row">
                                 <div class="card-prog-title col-12">
-                                    {{ program.title }}
+                                    {{ program.title }}<br>
+                                    <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
                                 </div>
                                 <div class="col-6">
-                                    <a class="card-category" href="{{ path('wild_cat', { 'cat': program.category.name|replace({' ':"-"})|lower }) }}">{{ program.category.name }}</a>
-                                    <br><br><span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
+                                    <span class="card-seasons">{{ program.seasons|length }} saisons.</span><br>
                                     <a class="btn btn-primary btn-small" href="{{ path('wild_show', { 'slug': program.slug }) }}">Détails</a>
                                 </div>
                                 <div class="text-dark col-6">
@@ -65,4 +65,16 @@
         {% endfor %}
         </div>
     </div>
+
+
+    <div class="" id="watchlist-toast">
+        <div class="toast-header bg-primary text-white">
+            <strong class="mr-auto">Your Watchlist</strong>
+        </div>
+        <div class="toast-body" id="watchlist-msg">
+            coucou
+        </div>
+    </div>
+
+
 {% endblock %}

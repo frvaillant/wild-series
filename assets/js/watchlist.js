@@ -1,9 +1,9 @@
    class Watchlistener {
-        constructor(elem) {
+        constructor(elem, action) {
             this.button = elem;
             this.classList = elem.classList;
             this.link = elem.dataset.target;
-
+            this.action = action;
             this.button.addEventListener('click', (e) => {
                 e.preventDefault()
                 if (this.isInList()) {
@@ -15,7 +15,7 @@
                 fetch(this.link).then(response => {
                     return response.text();
                 }).then(json => {
-                    console.log(json);
+                    this.action(json)
                 });
             })
         }
@@ -42,6 +42,8 @@
         const watchListButtons = document.getElementsByClassName('watch-btn');
         for (let i = 0; i < watchListButtons.length; i++) {
             console.log(watchListButtons[i]);
-            const watchListBtn = new Watchlistener(watchListButtons[i])
+            const watchListBtn = new Watchlistener(watchListButtons[i], (data) => {
+                data = JSON.parse(data)
+            })
         }
     })

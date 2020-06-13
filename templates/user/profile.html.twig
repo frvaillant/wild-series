@@ -4,25 +4,43 @@
 
 {% block body %}
     <div class="container">
-        <div class="col-4">
+        <div class="row">
+            <div class="col-4">
 
+            </div>
+            <div class="col-4">
+                <h1>Hello {{ username }}</h1>
+
+                <table>
+                    <tr>
+                        <td>Username</td>
+                        <td>{{ username }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ email }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-4">
+
+            </div>
         </div>
-        <div class="col-4">
-            <h1>Hello {{ username }}</h1>
+        <div class="row">
+            <div class="col-4">
 
-            <table>
-                <tr>
-                    <td>Username</td>
-                    <td>{{ username }}</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>{{ email }}</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-4">
+            </div>
+            <div class="col s4">
+                <h3 class="text-primary">Your Watch List</h3>
+                <ul>
+                {% for program in app.user.programs %}
+                    <li><a href="{{ path('wild_show', { 'slug': program.slug }) }}">{{ program.title }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col-4">
 
+            </div>
         </div>
     </div>
 {% endblock %}

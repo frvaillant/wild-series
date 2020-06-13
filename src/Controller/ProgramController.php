@@ -133,7 +133,6 @@ class ProgramController extends AbstractController
         }
         $entityManager->flush();
         return $this->json([
-            'isInWatchlist' => $this->getUser()->hasInWatchlist($program),
             'message'       => $message
         ]);
     }
