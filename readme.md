@@ -1,5 +1,5 @@
 #Wild series
 
-###Quete 22 : query builder
+###Quete 23 : Flash messages
 
-[Voir la vidéo](http://frvaillant.com/wcs/screencasts/22.mp4)
+[Voir la vidéo](http://frvaillant.com/wcs/screencasts/23.mp4)

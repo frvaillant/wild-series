@@ -47,9 +47,8 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($program);
             $entityManager->flush();
-
+            $this->addFlash('success', 'la série ' . $program->getTitle() . ' a bien été ajoutée');
             $mailer->sendMailNewProgram($program->getTitle(), $program->getSummary(), $program->getSlug());
-
 
             return $this->redirectToRoute('program_index');
         }
@@ -105,8 +104,10 @@ class ProgramController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $title = $program->getTitle();
             $entityManager->remove($program);
             $entityManager->flush();
+            $this->addFlash('error', 'la série ' . $title . ' a bien été supprimée');
         }
 
         return $this->redirectToRoute('program_index');
