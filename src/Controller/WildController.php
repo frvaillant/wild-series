@@ -30,7 +30,7 @@ class WildController extends AbstractController
      * @param CategoryRepository $categoryRepository
      * @return Response
      */
-    public function index(ProgramRepository $programRepository, CategoryRepository $categoryRepository): Response
+    public function index(ProgramRepository $programRepository): Response
     {
 
         $errors = '';
@@ -41,13 +41,11 @@ class WildController extends AbstractController
                 'Aucune série trouvée'
             );
         }
-        $categories = $categoryRepository->findAll();
         return $this->render('home.html.twig', [
             'errors'       => $errors,
             'home_program' => $homeProgram,
             'programs'     => $programs,
             'website'      => 'Wild Series',
-            'categories'   => $categories,
         ]);
     }
 
