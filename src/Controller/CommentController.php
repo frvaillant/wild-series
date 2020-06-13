@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Episode;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Repository\EpisodeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,25 +23,30 @@ class CommentController extends AbstractController
     public function index(CommentRepository $commentRepository): Response
     {
         return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findAll(),
+            'comments' => $commentRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
 
     /**
-     * @Route("/new", name="comment_new", methods={"GET","POST"})
+     * @Route("/new/{episode}", name="comment_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EpisodeRepository $episodeRepository, $episode): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $theEpisode = $episodeRepository->findOneById($episode);
+            $comment->setEpisode($theEpisode);
+            $user = $this->getUser();
+            $comment->setAuthor($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('wild_episode', [
+                'id' => $episode
+            ]);
         }
 
         return $this->render('comment/new.html.twig', [

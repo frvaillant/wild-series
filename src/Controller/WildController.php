@@ -3,11 +3,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Episode;
+use App\Form\CommentType;
+use App\Form\EpisodeType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
 use App\Service\WildMailer;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -126,15 +130,15 @@ class WildController extends AbstractController
      *     defaults={"id"="1"},
      *     name="episode")
      */
-    public function showEpisode(Episode $episode, CategoryRepository $categoryRepository): Response
+    public function showEpisode(Episode $episode): Response
     {
-        //$episode->getSeason();  PAS BESOIN
-        //$season->getProgram();  PAS BESOIN NON PLUS
-        $categories = $categoryRepository->findAll();
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
         return $this->render('episode.html.twig', [
             'website'    => 'Wild Série',
             'episode'    => $episode,
-            'categories' => $categories,
+            'form'       => $form->createView()
         ]);
 
     }

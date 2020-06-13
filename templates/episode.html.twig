@@ -5,11 +5,33 @@
 {%  block body %}
 
     <div class="container">
-        <h1> {{ episode.title }} </h1>
-        épisode {{ episode.number }} de la <a href="{{ path('wild_season', {'seasonId' : episode.season.id }) }}">saison {{ episode.season.number }}</a> de
-        <a href="{{ path('wild_show', {'title' : episode.season.program.title|replace({' ': '-'})|lower}) }}">{{ episode.season.program.title }}</a>
-        <p>
-            <small><em>{{ episode.synopsis  }}</em></small>
-        </p>
+        <div class="row">
+            <h1> {{ episode.title }} </h1>
+            épisode {{ episode.number }} de la <a href="{{ path('wild_season', {'seasonId' : episode.season.id }) }}">saison {{ episode.season.number }}</a> de
+            <a href="{{ path('wild_show', {'title' : episode.season.program.title|replace({' ': '-'})|lower}) }}">{{ episode.season.program.title }}</a>
+            <p>
+                <small><em>{{ episode.synopsis  }}</em></small>
+            </p>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Vos commentaires</h3>
+                </div>
+                <div class="col-12">
+                    {{ render(controller('App\\Controller\\CommentController::index')) }}
+                </div>
+            </div>
+        </div>
+        {% if app.user %}
+        <div class="row">
+            {{ form_start(form, {'action': path('comment_new', {'episode' : episode.id }), 'method': 'POST'}) }}
+            Laissez nous un petit commentaire<br>
+            {{ form_widget(form.comment) }}<br><br>
+            {{ form_widget(form.rate) }}<br><br>
+            <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

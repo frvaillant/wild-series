@@ -1,4 +1,6 @@
-{{ form_start(form) }}
+{{ form_start(form, {'action': path('comment_new'), 'method': 'POST'}) }}
+    Laissez nous un petit commentaire
     {{ form_widget(form) }}
+    <input type="hidden" id="comment_episode" name="comment[episode]" value = {{ episode.id }}>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

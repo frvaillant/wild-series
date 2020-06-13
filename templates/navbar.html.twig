@@ -19,13 +19,17 @@
         <ul class="form-inline mt-2 mt-md-0">
 
                 {% if app.user %}
-                    {{ app.user.username }}
-                    <a class="btn btn-primary" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                    <span class="mgr10">Bonjour {{ app.user.username }}</span>
+
+                    <a class="btn btn-primary mgr10" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-primary admin-button" href="{{path('program_index')}}">EDITION</a>
+                    {% endif %}
+
                 {% else %}
                     <a class="btn btn-primary" href="{{ path('app_login') }}"> Se connecter</a>
                 {% endif %}
 
-             <a class="btn btn-primary" href="{{path('program_index')}}">EDITION</a>
         </ul>
     </div>
 </nav>
