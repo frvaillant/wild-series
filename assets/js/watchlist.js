@@ -15,7 +15,7 @@
                 fetch(this.link).then(response => {
                     return response.text();
                 }).then(json => {
-
+                    console.log(JSON.parse(json))
                 });
             })
         }
