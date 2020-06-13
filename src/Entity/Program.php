@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation as Vichy;
 use \DateTimeInterface;
 use \DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
  * @UniqueEntity("title", message="Cette série existe déja")
- * @Vich\Uploadable
+ * @Vichy\Uploadable
  */
 class Program
 {
@@ -73,7 +73,7 @@ class Program
     private $poster;
 
     /**
-     * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
+     * @Vichy\UploadableField(mapping="poster_file", fileNameProperty="poster")
      * @var File
      */
     private $posterFile;
