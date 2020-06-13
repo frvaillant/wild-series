@@ -8,7 +8,7 @@
         <div class="row">
             <h1> {{ episode.title }} </h1>
             <div class="col-12">épisode {{ episode.number }} de la <a href="{{ path('wild_season', {'seasonId' : episode.season.id }) }}">saison {{ episode.season.number }}</a> de
-                <a href="{{ path('wild_show', {'title' : episode.season.program.title|replace({' ': '-'})|lower}) }}">{{ episode.season.program.title }}</a></div>
+                <a href="{{ path('wild_show', {'slug' : episode.season.program.slug}) }}">{{ episode.season.program.title }}</a></div>
             <p>
                 <small><em>{{ episode.synopsis  }}</em></small>
             </p>
