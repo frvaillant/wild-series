@@ -37,6 +37,11 @@
                                 <img src="{{ program.poster}}">
                         </div>
                         <div class="card-prog-description container">
+
+                            {% if app.user %}
+                                <a class="watch-btn {{ app.user.hasInWatchlist(program) ? 'in-list' : '' }}" href="#" data-target="{{ path('program_watchlist', {'program' : program.id}) }}"><i class="material-icons">favorite</i></a>
+                            {% endif %}
+
                             <div class="row">
                                 <div class="card-prog-title col-12">
                                     {{ program.title }}

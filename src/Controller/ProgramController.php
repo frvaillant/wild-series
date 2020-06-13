@@ -8,7 +8,9 @@ use App\Repository\CategoryRepository;
 use App\Repository\ProgramRepository;
 use App\Service\Slugify;
 use App\Service\WildMailer;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -111,5 +113,28 @@ class ProgramController extends AbstractController
         }
 
         return $this->redirectToRoute('program_index');
+    }
+
+    /**
+     * @Route("/{program}/watchlist", name="program_watchlist", methods={"GET"})
+     */
+    public function addToWatchList ($program, ProgramRepository $programRepository): JsonResponse
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $program = $programRepository->findOneById($program);
+
+        if ($this->getUser()->getPrograms()->contains($program)) {
+            $this->getUser()->removeProgram($program);
+            $message = $program->getTitle() . ' a été supprimé de votre watch list';
+        }
+        else {
+            $this->getUser()->addProgram($program);
+            $message = $program->getTitle() . ' a été ajouté à votre watch list';
+        }
+        $entityManager->flush();
+        return $this->json([
+            'isInWatchlist' => $this->getUser()->hasInWatchlist($program),
+            'message'       => $message
+        ]);
     }
 }
