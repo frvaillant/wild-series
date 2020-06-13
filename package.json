@@ -20,7 +20,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
-        "toastr": "^2.1.4",
         "triswitch": "^1.0.0"
     }
 }

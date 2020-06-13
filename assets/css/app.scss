@@ -7,7 +7,6 @@
 /* Fontawesome */
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import "~triswitch";
-@import "~toastr";
 
 @keyframes fade-out {
   0% {
@@ -309,6 +308,16 @@ a {
     background:$primary;
     color:#fff;
   }
+}
+
+.watchlist-toast {
+  position:absolute;
+  top: 20px;
+  right: 20px;
+  width:200px;
+  height: 70px;
+  background: #000;
+  border:2px solid #fff;
 }
 
 

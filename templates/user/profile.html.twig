@@ -35,7 +35,10 @@
                 <ul>
                 {% for program in app.user.programs %}
                     <li><a href="{{ path('wild_show', { 'slug': program.slug }) }}">{{ program.title }}</a></li>
+                {% else %}
+                    <li>Aucune série dans votre watch list</li>
                 {% endfor %}
+
                 </ul>
             </div>
             <div class="col-4">

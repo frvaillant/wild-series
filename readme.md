@@ -1,5 +1,5 @@
 #Wild series
 
-###Quete 23 : Flash messages
+###Quete 24 : Ajax
 
-[Voir la vidéo](http://frvaillant.com/wcs/screencasts/23.mp4)
+[Voir la vidéo](http://frvaillant.com/wcs/screencasts/24.mp4)
