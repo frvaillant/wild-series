@@ -18,12 +18,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/", name="comment_index", methods={"GET"})
+     * @Route("/{episode}", name="comment_index", methods={"GET"})
      */
-    public function index(CommentRepository $commentRepository): Response
+    public function index(EpisodeRepository $episodeRepository, CommentRepository $commentRepository, $episode): Response
     {
+        $theEpisode = $episodeRepository->findOneById($episode);
         return $this->render('comment/index.html.twig', [
-            'comments' => $commentRepository->findBy([], ['id' => 'DESC']),
+            'comments' => $commentRepository->findBy(['episode' => $theEpisode], ['id' => 'DESC']),
         ]);
     }
 
