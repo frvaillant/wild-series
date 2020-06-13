@@ -9,6 +9,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
+
 class SeasonFixtures extends Fixture implements DependentFixtureInterface
 {
     const NUMBER_PROGRAMS = 12;

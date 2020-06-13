@@ -17,7 +17,15 @@
         </ul>
 
         <ul class="form-inline mt-2 mt-md-0">
-            <a class="btn" href="{{path('program_index')}}">EDITION</a>
+
+                {% if app.user %}
+                    {{ app.user.username }}
+                    <a class="btn btn-primary" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('app_login') }}"> Se connecter</a>
+                {% endif %}
+
+             <a class="btn btn-primary" href="{{path('program_index')}}">EDITION</a>
         </ul>
     </div>
 </nav>

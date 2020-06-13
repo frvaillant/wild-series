@@ -29,8 +29,6 @@ class SearchController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('program_index');
         }
-
-
         return $this->render('search/index.html.twig', [
             'categories' => $categories,
             'form'       => $form->createView()
