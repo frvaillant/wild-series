@@ -19,7 +19,7 @@
         <ul class="form-inline mt-2 mt-md-0">
 
                 {% if app.user %}
-                    <span class="mgr10">Bonjour {{ app.user.username }}</span>
+                    <span class="mgr10">Bonjour <a href="{{ path('user_profile') }}">{{ app.user.username }}</a></span>
 
                     <a class="btn btn-primary mgr10" href="{{ path('app_logout') }}">Se déconnecter</a>
                     {% if is_granted('ROLE_ADMIN') %}
